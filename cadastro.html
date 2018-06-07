@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <!-- META SECTION -->
+    <title>SIEX NEWTON - Cadastrar Ação</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8" />
+    
+    <!-- CSS INCLUDE -->
+    <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css" />
+    <link rel="stylesheet" href="assets/uploads/MIME-Types/elfinder.css" type="text/css">
+    <!-- EOF CSS INCLUDE -->
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <!-- END META SECTION -->
+
+    <!-- START PLUGINS -->
+    <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="js/plugins/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap.min.js"></script>
+    <!-- END PLUGINS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    
+</head>
+
+<body ng-app="myApp" ng-controller="dadosController">
+    <!-- START PAGE CONTAINER -->
+    <div class="page-container">
+
+        <!-- START PAGE SIDEBAR -->
+        <div class="page-sidebar">
+            <!-- START X-NAVIGATION -->
+            <menu-comum ng-if="user.idc_tipo_usuario=='undefined'"></menu-comum>
+            <menu-prof class="x-navigation" ng-if="user.idc_tipo_usuario==1"> </menu-prof>
+            <menu-coor class="x-navigation" ng-if="user.idc_tipo_usuario==2"> </menu-coor>
+            <menu-adm class="x-navigation" ng-if="user.idc_tipo_usuario==3"> </menu-adm>
+            <!-- END X-NAVIGATION -->
+        </div>
+        <!-- END PAGE SIDEBAR -->
+
+        <!-- PAGE CONTENT -->
+        <div class="page-content">
+
+            <!-- START X-NAVIGATION VERTICAL -->
+            <menu-topo></menu-topo>
+            <!-- END X-NAVIGATION VERTICAL -->
+
+
+            <!-- START BREADCRUMB -->
+            <ul class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Novo Projeto</li>
+            </ul>
+            <!-- END BREADCRUMB -->
+
+            <!-- PAGE CONTENT WRAPPER -->
+            <div class="page-content-wrap">
+
+                <div class="row">
+                    <div id="msg"></div>
+                    <div class="col-md-12">
+                        <form class="form-horizontal" ng-submit="cadastrar_acao()" id="jvalidate" role="form">
+
+                            <div class="panel panel-default pull-right">
+                                <div class="panel-header">&nbsp;</br>&nbsp;</br>&nbsp;
+
+                                </div>
+
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="active"><a href="#tab-projeto" role="tab" data-toggle="tab">Novo Projeto</a></li>
+                                    <li><a href="#tab-equipe" role="tab" data-toggle="tab">Equipe </a></li>
+                                    <li><a href="#tab-parceria" role="tab" data-toggle="tab">Parceria </a></li>
+                                    <li><a href="#tab-resultados" role="tab" data-toggle="tab">Resultados </a></li>
+                                    <li><a href="#tab-historico" role="tab" data-toggle="tab">Histórico </a></li>
+                                    <li><button ng-click="" type="submit" class="btn btn-primary btn-lg pull-right">Criar Projeto 
+                                            <span class="fa fa-floppy-o fa-right"></span>
+                                        </button></li>
+                                </ul>
+
+
+
+                                <div class="panel-body tab-content">
+                                    <div class="tab-pane active" id="tab-projeto">
+                                        <p>Crie o Projeto primeiro com os dados iniciais para então completa-lo com todas as informações posteriormente.</p>
+
+                                        <!-- Já deve vim marcado a opção Programa -->
+                                        <div class="block">
+                                            <h4>Tipo de Ação</h4>
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <div class="col-md-2" ng-repeat="t in tiposAcaos">
+                                                            <label class="check"><input type="radio" class="iradio" name="iradio" ng-model="acao.tipoAcao" value="{{t.id}}"/>{{t.descricao}}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 col-xs-12 control-label"> Titulo *</label>
+                                            <div class="col-md-6 col-xs-12">
+                                                <input type="text" name="titulo" class="form-control" name="titulo" placeholder="Titulo do Projeto" ng-model="acao.titulo" value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 col-xs-12 control-label">Curso Responsavel *</label>
+                                            <div class="col-md-6 col-xs-12">
+                                                <select class="form-control select" data-live-search="true" ng-model="acao.cursoResponsavel">
+                                                         <option class="small-font" selected></option>
+                                                         <option class="small-font" ng-repeat="c in cursos" data-select-watcher data-last="{{$last}}" value="{{c.id}}">{{c.nome}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!-- Área temática intregadora -->
+                                        <div class="block">
+                                            <h4>Área temática intregadora</h4>
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <div class="col-md-3" ng-repeat="x in areasTematicas">
+                                                            <label class="check">
+                                                                    <input type="checkbox" class="icheckbox" ng-model="acao.areaTematicaIntegradora[x.id]" value={{x.id}}/> {{x.nome}}</input>
+                                                                </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Objetivos de Desenvolvimento Sustentável da ONU -->
+                                        <div class="block">
+                                            <h4>Objetivos de Desenvolvimento Sustentável da ONU </h4>
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <div class="col-md-3" ng-repeat="x in objetivosOnu">
+                                                            <label class="check">
+                                                                    <input type="checkbox" class="icheckbox" ng-model="acao.objetivosONU[x.id]" value={{x.id}}/> {{x.nome}}</input>
+                                                                </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Desafios do Planejamento Estratégico de BH 2030 -->
+                                        <div class="block">
+                                            <h4>Desafios do Planejamento Estratégico de BH 2030</h4>
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <div class="col-md-3" ng-repeat="x in desafiosBh2030">
+                                                            <label class="check">
+                                                                    <input type="checkbox" class="icheckbox" ng-model="acao.desafiosBH2030[x.id]" value={{x.id}}/> {{x.nome}}</input>
+                                                                </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Cursos Envolvido -->
+                                        <div class="block">
+                                            <h4>Cursos Envolvidos</h4>
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <div class="col-md-3" ng-repeat="x in cursos">
+                                                            <label class="check"><input type="checkbox" class="icheckbox" ng-model="acao.cursos_envolvidos[x.id]" value={{x.id}}/> {{x.nome}}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="form-group">
+                                            <label class="col-md-3 col-xs-12 control-label">Coordenador do Curso *</label>
+                                            <div class="col-md-6 col-xs-12">
+                                                <select name="coordenador" class="form-control select" data-live-search="true" ng-model="acao.coordenador">
+                                                        <option></option>
+                                                        <option value="5" >Coordenador 5</option>
+                                                        <option value="4" >Coordenador 4</option>
+                                                        <option value="3" >Coordenador 3</option>
+                                                        <option value="2" >Coordenador 2</option>
+                                                        <option value="1" >Coordenador 1</option>
+
+                                                    </select>
+                                            </div>
+                                        </div> 
+                                        
+                                        <div class="form-group">
+                                            <label class="col-md-3 col-xs-12 control-label">Docente Responsável *</label>
+                                            <div class="col-md-6 col-xs-12">
+                                                <select name="docente" class="form-control select" data-live-search="true" ng-model="acao.docente">
+                                                        <option></option>
+                                                        <option value="12">Docente 12 </option>
+                                                        <option value="13">Docente 13 </option>
+                                                        <option value="14">Docente 14 </option>
+                                                        <option value="15">Docente 15 </option>
+                                                        <option value="16">Docente 16 </option>
+
+                                                    </select>
+                                            </div>
+                                        </div> -->
+                                        <div class="form-group">
+                                            <label class="col-md-3 col-xs-12 control-label">Descrição *</label>
+                                            <div class="col-md-6 col-xs-12">
+                                                <textarea rows="4" cols="50" type="textarea" name="descricao" class="form-control" placeholder="Descrição do Projeto" ng-model="acao.descricao" value=""></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 col-xs-12 control-label">Objetivo *</label>
+                                            <div class="col-md-6 col-xs-12">
+                                                <textarea rows="4" cols="50" type="textarea" name="objetivo" class="form-control" placeholder="Objetivo do Projeto" ng-model="acao.objetivo" value=""></textarea>
+                                            </div>
+                                        </div>
+                                        <!--
+                                        <div class="form-group">
+                                            <label class="col-md-3 col-xs-12 control-label">Programa vinculado</label>
+                                            <div class="col-md-6 col-xs-12">
+                                                <input type="text" name="programaVinculado" class="form-control" placeholder="Informar se a atividade está viculada a algum programa de extensão da Newton" ng-model="acao.programaVinculado" value="" />
+
+                                            </div>
+                                        </div>
+                                        -->
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Data de início* </label>
+                                            <div class="col-md-3">
+                                                <input type="text" id="data" name="dataInicio" data-mask="00/00/0000" data-mask-reverse="true" class="form-control datepicker" ng-model="acao.dataInicio">
+                                            </div>
+                                            <label class="col-md-2 control-label">Data de término </label>
+                                            <div class="col-md-3">
+                                                <input type="text" id="data" name="dataTermino" data-mask="00/00/0000" data-mask-reverse="true" class="form-control datepicker" ng-model="acao.dataTermino">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Data em que foi registrado</label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="data" name="dataResgistro" data-mask="00/00/0000" data-mask-reverse="true" disabled="true" class="form-control datepicker" ng-model="acao.dataResgistro" value="">
+                                            </div>
+
+                                            <!-- Horario deve ficar junto com a data de inicio -->
+                                        </div>
+                                        <!--
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label">Horário</label>
+                                            <div class="col-md-5">
+                                                <div class="input-group bootstrap-timepicker">
+                                                    <input type="text" name="" class="form-control" ng-model="acao.horario" data-mask="00:00" data-mask-reverse="true" />
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        -->
+                                        <div class="form-group">
+                                            <label class="col-md-3 col-xs-12 control-label">Palavras Chave *</label>
+                                            <div class="col-md-6 col-xs-12">
+                                                <input type="text" name="palavrasChave" class="form-control tagsinput" placeholder="Eleger de 3 a 5 palavras chave que se relacionam com a atividade" ng-model="acao.palavrasChave" />
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 col-xs-12 control-label">Atividades *</label>
+                                            <div class="col-md-6 col-xs-12">
+                                                <input type="text" name="atividades" class="form-control tagsinput" placeholder="Listar quais foram as atividades desenvolvidas ao longo da ação" ng-model="acao.atividades" />
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-3 col-xs-12 control-label">Local *</label>
+                                            <div class="col-md-6 col-xs-12">
+                                                <input type="text" name="local" class="form-control" placeholder="Identificar onde foi realizada a ação do Projeto" ng-model="acao.local" value="" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 col-xs-12 control-label">Público alvo*</label>
+                                            <div class="col-md-6 col-xs-12">
+                                                <input type="text" name="publicoAlvo" class="form-control tagsinput" placeholder="Informar qual o público principal alcançado pela atividade" ng-model="acao.publicoAlvo" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="tab-equipe">
+                                        <p>Indique a equipe </p>
+
+                                        <div class="panel panel-default">
+
+                                            <div class="panel-body panel-body-table">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Participação</th>
+                                                            <th>Nome</th>
+                                                            <th>Curso/Departamento/Setor</th>
+                                                            <th>Período</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><input type="text" name="e_participacao[0]" class="form-control" ng-model="acao.equipe.participacao" value="" /> </td>
+                                                            <td><input type="text" name="e_nome[0]" class="form-control" ng-model="acao.equipe.nome" value="" /></td>
+                                                            <td><input type="text" name="e_curso/departamento/periodo[0]" class="form-control" ng-model="acao.equipe.curso" value="" /> </td>
+                                                            <td><input type="text" name="e_perido[0]" class="form-control" ng-model="acao.equipe.periodo" value="" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><input type="text" name="e_participacao[1]" class="form-control" ng-model="acao.equipe.participacao" value="" /> </td>
+                                                            <td><input type="text" name="e_nome[1]" class="form-control" ng-model="acao.equipe.nome" value="" /></td>
+                                                            <td><input type="text" name="e_curso/departamento/periodo[1]" class="form-control" ng-model="acao.equipe.curso" value="" /></td>
+                                                            <td><input type="text" name="e_periodo[1]" class="form-control" ng-model="acao.equipe.periodo" value="" /></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><input type="text" name="e_participacao[2]" class="form-control" ng-model="acao.equipe.participacao" value="" /> </td>
+                                                            <td><input type="text" name="e_nome[2]" class="form-control" ng-model="acao.equipe.nome" value="" /></td>
+                                                            <td><input type="text" name="e_curso/departamento/periodo[2]" class="form-control" ng-model="acao.equipe.curso" value="" /></td>
+                                                            <td><input type="text" name="e_periodo[]" class="form-control" ng-model="acao.equipe.periodo" value="" /></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="tab-parceria">
+
+                                        <div class="panel-body panel-body-table">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nome</th>
+                                                        <th>Área de Atuação do Parceiro</th>
+                                                        <th>Descrever o envolvimento na ação</th>
+                                                        <th>Site do parceiro</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><input type="text" name="p_nome[0]" class="form-control" ng-model="acao.parceria.nome" value="" /> </td>
+                                                        <td><input type="text" name="p_area[0]" class="form-control" ng-model="acao.parceria.area_atuacao" value="" /></td>
+                                                        <td><input type="text" name="p_envolvimento[0]" class="form-control" ng-model="acao.parceria.descricao_envolvimento" value="" /> </td>
+                                                        <td><input type="text" name="p_site[0]" class="form-control" ng-model="acao.parceria.site" value="" /></td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type="text" name="p_nome[1]" class="form-control" ng-model="acao.parceria.nome" value="" /> </td>
+                                                        <td><input type="text" name="p_area[1]" class="form-control" ng-model="acao.parceria.area_atuacao" value="" /></td>
+                                                        <td><input type="text" name="p_envolvimento[1]" class="form-control" ng-model="acao.parceria.descricao_envolvimento" value="" /> </td>
+                                                        <td><input type="text" name="p_site[1]" class="form-control" ng-model="acao.parceria.site" value="" /></td>
+                                                    </tr>
+                                                    <tr>
+
+                                                        <td><input type="text" name="p_nome[2]" class="form-control" ng-model="acao.parceria.nome" value="" /> </td>
+                                                        <td><input type="text" name="p_area[2]" class="form-control" ng-model="acao.parceria.area_atuacao" value="" /></td>
+                                                        <td><input type="text" name="p_envolvimento[2]" class="form-control" ng-model="acao.parceria.descricao_envolvimento" value="" /> </td>
+                                                        <td><input type="text" name="p_site[2]" class="form-control" ng-model="acao.parceria.site" value="" /></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="tab-resultados">
+
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 col-xs-12 control-label"> Número de impactados </label>
+                                            <div class="col-md-6 col-xs-12">
+                                                <input type="text" name="titulo" class="form-control" placeholder="10.000" ng-model="acao.numero_impacto" value="" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 col-xs-12 control-label"> Alunos da Newton envolvidos </label>
+                                            <div class="col-md-6 col-xs-12">
+                                                <input type="text" name="titulo" class="form-control" placeholder="10.000" ng-model="acao.aluno_envolvido" value="" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 col-xs-12 control-label">Professores da Newton envolvidos </label>
+                                            <div class="col-md-6 col-xs-12">
+                                                <input type="text" name="titulo" class="form-control" placeholder="10.000" ng-model="acao.professor_envolvido" value="" />
+                                            </div>
+                                        </div>
+
+
+                                        <div class="panel-body panel-body-table">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><input type="text" name="p_nome[0]" class="form-control" value="" /> </td>
+                                                        <td><input type="text" name="p_nome[1]" class="form-control" value="" /> </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="tab-historico">
+                                        <div class="page-content-wrap">
+
+                                            <div class="row">
+                                                <div class="col-md-8">
+
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-body">
+                                                            <span class="fa fa-mail-forward"></span>
+
+                                                            <div class="form-group">
+                                                                <div class="col-md-12">
+                                                                    <label>PDF</label>
+                                                                    <input type="file" multiple class="fileinput" data-preview-file-type="any" />
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="panel-body panel-body-table">
+                                                            <table class="table table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Nome</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><input type="text" name="p_nome[0]" class="form-control" value="" /> </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div id="msg2"></div>
+                                <div class="panel-footer">
+                                    <button ng-click="" type="submit" class="btn btn-primary btn-lg pull-right">Criar Projeto 
+                                            <span class="fa fa-floppy-o fa-right"></span>
+                                    </button></li>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTENT WRAPPER -->
+        </div>
+        <!-- END PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTAINER -->
+
+
+    <!-- START SCRIPTS -->
+
+    <!-- THIS PAGE PLUGINS -->
+    <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
+    <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+
+    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-file-input.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script>
+    <script type="text/javascript" src="js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
+    <!-- SCRIPT DE TIMERINPUT -->
+    <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-timepicker.min.js"></script>
+    <!-- SCRIPT DE MASCARA -->
+    <script type="text/javascript" src="js/jquery.mask.js"></script>
+    <!-- SCRIPTS DE VALIDAÇÃO DE FORM-->
+    <script type='text/javascript' src='js/plugins/validationengine/languages/jquery.validationEngine-pt_BR.js'></script>
+    <script type='text/javascript' src='js/plugins/validationengine/jquery.validationEngine.js'></script>
+    <script type='text/javascript' src='js/plugins/jquery-validation/jquery.validate.js'></script>
+
+    <!-- END THIS PAGE PLUGINS -->
+
+    <!-- START TEMPLATE -->
+    <script type="text/javascript" src="js/settings.js"></script>
+
+    <script type="text/javascript" src="js/plugins.js"></script>
+    <script type="text/javascript" src="js/actions.js"></script>
+    <script type="text/javascript" src="js/faq.js"></script>
+
+    <!-- END TEMPLATE -->
+    <!-- START MY SCRIPTS -->
+    <script>
+        // INCLUIR MASCARAS
+        $(document).ready(function() {
+            $("#data").mask("99/99/9999", {
+                placeholder: "dd/mm/yyyy"
+            });
+            $("#phone").mask("(999) 999-9999");
+            $("#tin").mask("99-9999999");
+            $("#ssn").mask("999-99-9999");
+            $("#hora").mask("99:99");
+
+        });
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            startDate: '-3d'
+        });
+        // JQUERY VALIDAÇÃO DO FORMULARIO
+        var jvalidate = $("#jvalidate").validate({
+            ignore: [],
+            rules: {
+                titulo: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 100
+                },
+                cursoResponsavel: {
+                    required: true
+                },
+                coordenador: {
+                    required: true
+                },
+                docente: {
+                    required: true
+                },
+                descricao: {
+                    required: true
+                },
+                objetivo: {
+                    required: true
+                },
+                dataInicio: {
+                    required: true
+                },
+                dataTermino: {
+                    required: false
+                },
+                palavrasChave: {
+                    required: true
+                },
+                atividades: {
+                    required: true
+                },
+                local: {
+                    required: false,
+                    minlength: 2,
+                    maxlength: 100
+                },
+                publicoAlvo: {
+                    required: true
+                }
+            }
+        });
+    </script>
+    <!-- END MY SCRIPTS -->
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/ngstorage/0.3.6/ngStorage.min.js"></script>
+    
+    <!-- Angular  -->
+    <script src="angular/module.js"></script>
+    <script src="angular/Services/Util.js"></script>
+    <script src="angular/Services/Usuario.js"></script>
+    <script src="angular/Services/TipoAcao.js"></script>
+    <script src="angular/Services/ConceitoExtensao.js"></script>
+    <script src="angular/Services/Acao.js"></script>
+    <script src="angular/Services/Situacao.js"></script>
+    <script src="angular/Services/TipoAcao.js"></script>
+    <script src="angular/Services/Curso.js"></script>
+
+    <script src="angular/cadastro_acao.js"></script>
+    <script src="angular/Directives/menuComum.js"></script>
+    <script src="angular/Directives/menuAdm.js"></script>
+    <script src="angular/Directives/menuCoor.js"></script>
+    <script src="angular/Directives/menuProf.js"></script>
+    <script src="angular/Directives/menuTopo.js"></script>
+    
+    <!-- END SCRIPTS -->
+    
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+https://stackoverflow.com/questions/31113097/angular-service-returns-empty-object
+https://github.com/gsklee/ngStorage
+/*http://stackoverflow.com/questions/25971400/bootstrap-select-angularjs-dropdown-not-working*/
+  // https://stackoverflow.com/questions/24587245/bootstrap-selectpicker-not-working-with-angularjs-dynamic-data-load-for-dropdown
+  //https://stackoverflow.com/questions/25971400/bootstrap-select-angularjs-dropdown-not-working
+  //http://techfunda.com/howto/482/custom-directive-with-templateurl
+  //https://colorlib.com/wp/angularjs-website-templates/
+  //https://startangular.com/

@@ -1,0 +1,83 @@
+
+            <!-- START BREADCRUMB -->
+            <ul class="breadcrumb">
+                <li class="active">Home</li>
+            </ul>
+            <!-- END BREADCRUMB -->
+
+            <!-- PAGE TITLE -->
+            <div class="page-title">
+                <h2><span class="fa fa-arrow-circle-o"></span>Ações</h2>
+            </div>
+            <!-- END PAGE TITLE -->
+
+            <!-- PAGE CONTENT WRAPPER -->
+            <div class="page-content-wrap">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-9">
+
+                                <div class="panel panel-default">
+                                    <div class="panel-body posts">
+                                        <div ng-repeat="a in acao">
+                                            <div class="col-md-6">
+                                                <div class="post-item">
+                                                    <div class="post-title">
+                                                        <a href="acao.html?id={{a.id}}">{{a.tipo_acao.descricao}}: {{a.titulo}}</a>
+                                                    </div>
+                                                    <div class="post-date"><span class="fa fa-calendar"></span> {{a.dt_registro}} / {{a.situacao.descricao}} / Por: <a href="#">{{a.professor.nome}}</a></div>
+                                                    <div class="post-text">
+                                                        <img src="assets/images/blog/post_1.jpg" class="img-responsive img-text" />
+                                                        <p>
+                                                            <span style="solid #000;	width: 170px;	height: 10px;	overflow: hidden;">
+                                                        {{a.descricao}}
+                                                    </span>...
+                                                        </p>
+                                                    </div>
+                                                    <div class="post-row">
+                                                        <div class="post-info">
+                                                            <ul class="list-tags">
+                                                                <li ng-repeat="p in a.ownPalavrachave"><a href="#"><span class="fa fa-tag"></span> {{p.palavra}}</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <a href="acao.html?id={{a.id}}" class="btn btn-default btn-rounded pull-right">Ver mais &RightArrow;</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--
+                        <ul class="pagination pagination-sm pull-right push-down-20">
+                            <li class="disabled"><a href="#">«</a></li>
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">»</a></li>
+                        </ul>
+                        -->
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <h3>Tipos</h3>
+                                        <div class="links">
+                                            <a ng-click="filtrarTipo(t.id)" ng-repeat="t in tiposAcao"></i>{{t.descricao}} </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- END PAGE CONTENT WRAPPER -->
+            
+            

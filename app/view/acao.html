@@ -1,0 +1,212 @@
+<!-- START BREADCRUMB -->
+            <ul class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li>{{acao.tipo_acao.descricao}}</li>
+                <li class="active">{{acao.titulo}}</li>
+            </ul>
+            <!-- END BREADCRUMB -->
+
+            <!-- PAGE CONTENT WRAPPER -->
+            <div class="page-content-wrap">
+
+                <div class="row">
+                    <div id="msg"></div>
+                    <div class="col-md-8">
+                        <div class="panel panel-default pull-right">
+                            <div class="panel-header">&nbsp;</br>&nbsp;</br>&nbsp;
+
+                            </div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="active"><a href="#tab-projeto" role="tab" data-toggle="tab">Detalhes</a></li>
+                            </ul>
+
+                            <div class="panel-body tab-content">
+                                <div class="tab-pane active" id="tab-projeto">
+
+                                    <div class="form-group">
+                                        <label class="col-md-6 col-xs-12 control-label"> Tipo de Ação: </label>
+                                        <label class="col-md-6 col-xs-12 control-label"> {{acao.tipo_acao.descricao}} </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-6 col-xs-12 control-label"> Titulo</label>
+                                        <label class="col-md-6 col-xs-12 control-label"> {{acao.titulo}} </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-6 col-xs-12 control-label">Curso Responsavel *</label>
+                                        <label class="col-md-6 col-xs-12 control-label"> {{acao.curso.nome}}</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-6 col-xs-12 control-label">Docente Responsavel *</label>
+                                        <label class="col-md-6 col-xs-12 control-label"> {{acao.professor.nome}}</label>
+                                    </div>
+                                    <!-- Área temática intregadora -->
+                                    <div class="block">
+                                        <h4>Área temática intregadora</h4>
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div class="col-md-3" ng-repeat="x in acao.area_tematica">
+                                                        <label>
+                                                                    {{x.nome}}
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Objetivos de Desenvolvimento Sustentável da ONU -->
+                                    <div class="block">
+                                        <h4>Objetivos de Desenvolvimento Sustentável da ONU </h4>
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div class="col-md-3" ng-repeat="x in acao.objetivo_onu">
+                                                        <label>
+                                                                    {{x.nome}}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Desafios do Planejamento Estratégico de BH 2030 -->
+                                    <div class="block">
+                                        <h4>Desafios do Planejamento Estratégico de BH 2030</h4>
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div class="col-md-3" ng-repeat="x in acao.desafio">
+                                                        <label>
+                                                                    {{x.nome}}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Cursos Envolvido -->
+                                    <!--
+                                    <div class="block">
+                                        <h4>Cursos Envolvidos</h4>
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div class="col-md-3" ng-repeat="x in acao.curso_envolvido">
+                                                        <label>
+                                                                    {{x.nome}}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    -->
+
+                                    <div class="form-group">
+                                        <label class="col-md-6 col-xs-12 control-label">Descrição *</label>
+                                        <label class="col-md-6 col-xs-12 control-label">
+                                            <p>
+                                                {{acao.descricao}}
+                                            </p>    
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-6 col-xs-12 control-label">Objetivo *</label>
+                                        <label class="col-md-6 col-xs-12 control-label">
+                                            <p>
+                                                {{acao.objetivo}}
+                                            </p>    
+                                        </label>
+                                    </div>
+                                    <!--
+                                    <div class="form-group">
+                                        <label class="col-md-6 col-xs-12 control-label">Programa vinculado</label>
+                                        <label class="col-md-6 col-xs-12 control-label">Programa vinculado</label>
+                                    </div>
+                                    -->
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Data de início* </label>
+                                        <label class="col-md-3 control-label">{{acao.dt_inicio}} </label>
+
+                                        <label class="col-md-3 control-label">Data de término </label>
+                                        <label class="col-md-3 control-label">{{acao.dt_termino}} </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-6 control-label">Data em que foi registrado</label>
+                                        <label class="col-md-6 control-label">{{acao.dt_registro}} </label>
+                                    </div>
+                                    <!--
+                                    <div class="form-group">
+                                        <label class="col-md-6 control-label">Horário</label>
+                                        <label class="col-md-6 control-label">{{acao.horario}} </label>
+                                    </div>
+                                    -->
+                                    <div class="form-group">
+                                        <label class="col-md-6 col-xs-12 control-label">Palavras Chave </label>
+                                        <div class="col-md-6 col-xs-12">
+                                            <ul class="list-tags">
+                                                <li ng-repeat="p in acao.ownPalavrachave"><a href="#"><span class="fa fa-tag"></span> {{p.palavra}}</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-6 col-xs-12 control-label">Atividades </label>
+                                        <div class="col-md-6 col-xs-12">
+                                            <ul class="list-tags">
+                                                <li ng-repeat="a in acao.ownAtividade"><a href="#"><span class="fa fa-tag"></span> {{a.nome}}</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-6 col-xs-12 control-label">Local </label>
+                                        <label class="col-md-6 col-xs-12 control-label">{{acao.local}}</label>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-6 col-xs-12 control-label">Público alvo</label>
+                                        <label class="col-md-6 col-xs-12 control-label">{{acao.publico_alvo}}</label>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="panel panel-primary">
+                            <div class="panel-body">
+                                <h3>Avaliação</h3>
+                                <p></p>
+                                <div class="form-group">
+                                <label>Status</label>
+                                      <form role="form" class="form-horizontal">                                    
+                                    <div class="form-group">
+                                        <label class="col-md-9 control-label"Status</label>
+                                        <div class="col-md-9">                                        
+                                            <select class="form-control select">
+                                                <option>Aprovado</option>
+                                                <option>Reprovado</option>
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Comentário</label></label>
+                                    <textarea class="form-control" placeholder="Sua mensagem" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <button class="btn btn-success pull-left"><span class="fa fa-save"></span>Salvar</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTENT WRAPPER -->
+<script type="text/javascript" src="../commons/selectBox.js"></script>
